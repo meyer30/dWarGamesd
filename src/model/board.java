@@ -51,13 +51,13 @@ public class board{
 		availableSpaces--;
 		boardArray[row][column].owner = newOwner;
 		if(isSpaceDeathBlizable(row, column, newOwner))
-			if(row > 1 && !("Nobody".equals(boardArray[row-1][column])))
+			if(row > 1 && !("Nobody".equals(boardArray[row-1][column].owner)))
 				boardArray[row-1][column].owner = newOwner;
-			else if(row < 4 && !("Nobody".equals(boardArray[row+1][column])))
+			else if(row < 4 && !("Nobody".equals(boardArray[row+1][column].owner)))
 				boardArray[row+1][column].owner = newOwner;
-			else if(column > 1 && !("Nobody".equals(boardArray[row][column-1])))
+			else if(column > 1 && !("Nobody".equals(boardArray[row][column-1].owner)))
 				boardArray[row][column-1].owner = newOwner;
-			else if(column < 4 && !("Nobody".equals(boardArray[row][column+1])))
+			else if(column < 4 && !("Nobody".equals(boardArray[row][column+1].owner)))
 				boardArray[row][column+1].owner = newOwner;
 	}
 	
