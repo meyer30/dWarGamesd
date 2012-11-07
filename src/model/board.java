@@ -3,17 +3,18 @@ import model.space;
 import java.util.List;
 import java.util.ArrayList;
 
-
 public class board{
 	
 	public space[][] boardArray;
 	public int availableSpaces;
 	
-	public board(String values){
+	public board(String boardInfo){
+		String[] values = boardInfo.split("	");
 		boardArray = new space[5][5];
 		for(int row = 0; row < 5; row++){
 			for(int column = 0; column < 5; column++){
-				boardArray[row][column] = new space(1, row, column, "Nobody");
+				int value = getValueFromStringArray(values, row, column);
+				boardArray[row][column] = new space(value, row, column, "Nobody");
 			}
 		}
 		availableSpaces = 25;
@@ -137,5 +138,33 @@ public class board{
 			}
 			System.out.println("");
 		}
+	}
+	
+	
+	public void printScores(){
+		int blueScore = 0, greenScore = 0;
+		for(int row = 0; row < 5; row++){
+			for(int column = 0; column < 5; column++){
+				if("greenPlayer".equals(boardArray[row][column].owner))
+					greenScore+=boardArray[row][column].value;
+				else if("bluePlayer".equals(boardArray[row][column].owner))
+					blueScore+=boardArray[row][column].value;
+			}
+		}
+		System.out.println("Green player's score is :" + greenScore);
+		System.out.println("Blue player's score is :" + blueScore);
+	}
+	
+	
+	private int getValueFromStringArray(String[] values, int row, int column){
+		int indexOfValue = column + (row*5);
+		String valueStr = values[indexOfValue];
+		
+		int valueInt = 0;
+		for(int index = 0; index < valueStr.length(); index++){
+			valueInt *= 10;
+			valueInt += (int) valueStr.charAt(index) - 48;
+		}
+		return valueInt;
 	}
 }
