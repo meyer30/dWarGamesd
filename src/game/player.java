@@ -11,6 +11,7 @@ import game.projectedGainForSpace;
  */
 public class player {
 	String strategy, name, opponent;
+	int totalNodesExamined;
 
 	public player(String strategy, String name){
 		this.strategy = strategy;
@@ -18,6 +19,7 @@ public class player {
 		this.opponent = "greenPlayer";
 		if(this.name.equals("greenPlayer"))
 			this.opponent = "bluePlayer";
+		totalNodesExamined = 0;
 	}
 		
 	public void makeTurn(board currentBoard){
@@ -99,6 +101,7 @@ public class player {
 				bestGain = projectedGain;
 				bestSpace = currentSpace;
 			}
+			this.totalNodesExamined++;
 		}
 		projectedGainForSpace bestSpaceGain = new projectedGainForSpace(bestGain, bestSpace);
 		return bestSpaceGain;

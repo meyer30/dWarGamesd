@@ -7,11 +7,12 @@ public class board{
 	
 	public space[][] boardArray;
 	public int availableSpaces;
+	public long totalGameTime;
 	
 	public board(String boardInfo){
 		String[] values = boardInfo.split("	");
 		boardArray = new space[5][5];
-		long totalGameTime = 0;
+		totalGameTime = 0;
 		for(int row = 0; row < 5; row++){
 			for(int column = 0; column < 5; column++){
 				int value = getValueFromStringArray(values, row, column);
@@ -71,7 +72,6 @@ public class board{
 	
 	public List<space> getAvailableSpaces(String owner){
 		List<space> availableSpaces = new ArrayList<space>();
-		int index = 0;
 		for(int row = 0; row < 5; row++){
 			for(int column = 0; column < 5; column++){
 				if("Nobody".equals(boardArray[row][column].owner))

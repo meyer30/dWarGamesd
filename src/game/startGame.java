@@ -1,23 +1,15 @@
 package game;
 import model.board;
 import model.GameBoards;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class startGame {
 	public static void main(String args[]){
 		Scanner in = new Scanner(System.in);
 		
-//		TODO: Ask what playerone/blueplayer is
-		player bluePlayer = new player("miniMax", "bluePlayer");		
-//		TODO: Ask if what playertwo/greenplayer is
-		player greenPlayer = new player("miniMax", "greenPlayer");
+		player bluePlayer = new player("alpha-beta", "bluePlayer");	
+		player greenPlayer = new player("alpha-beta", "greenPlayer");
 		
-//		TODO: Ask what board to play
 		String boardName = null, boardInfo = null;
 		while(true){
 			System.out.println("What board would you like to play on?");
@@ -30,31 +22,44 @@ public class startGame {
 			else
 				System.out.println("Invalid board");
 		}
+		in.close();
 		
 		board choosenBoard = new board(boardInfo);
 		board completedBoard = simulateGame(bluePlayer, greenPlayer,
 														choosenBoard);
 			
-		printStats(completedBoard);
+		printStats(completedBoard, bluePlayer, greenPlayer);
 	}
 	
 	public static board simulateGame(player player1, player player2,
 												board currentBoard){
+		long beginTime = System.currentTimeMillis();
 
 		while(currentBoard.availableSpaces!=0){
 			player1.makeTurn(currentBoard);
 			if(currentBoard.availableSpaces==0)	break;
 			player2.makeTurn(currentBoard);
 		}
+		currentBoard.totalGameTime = System.currentTimeMillis() - beginTime;
 		return currentBoard;
 	}
 	
 
 	
-	public static void printStats(board completedBoard){
+	public static void printStats(board completedBoard, player blueP, player greenP){
 		completedBoard.printBoard();
 		completedBoard.printScores();
-//		TODO: System.out. all the stats needed for the report 
+		
+		int totalMoves = 25;	//There is only 25 spaces.
+		completedBoard.printBoard();
+		completedBoard.printScores();
+		long avgMoveTime = completedBoard.totalGameTime / (long) totalMoves;
+		int avgNodesExam = (greenP.totalNodesExamined + blueP.totalNodesExamined)/totalMoves;
+		System.out.println("Total game time was " + completedBoard.totalGameTime + " milliseconds.");
+		System.out.println("Average time per move was " + avgMoveTime + " milliseconds.");
+		System.out.println("Total nodes examined for blue player is " + blueP.totalNodesExamined + ".");
+		System.out.println("Total nodes examined for green player is " + greenP.totalNodesExamined + ".");
+		System.out.println("Average nodes examined per move is " + avgNodesExam + ".");
 	}
 	
 	
