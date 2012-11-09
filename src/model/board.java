@@ -11,6 +11,7 @@ public class board{
 	public board(String boardInfo){
 		String[] values = boardInfo.split("	");
 		boardArray = new space[5][5];
+		long totalGameTime = 0;
 		for(int row = 0; row < 5; row++){
 			for(int column = 0; column < 5; column++){
 				int value = getValueFromStringArray(values, row, column);
