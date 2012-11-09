@@ -31,13 +31,11 @@ public class player {
 		    projectedGainForSpace min = new projectedGainForSpace(-50000, null);
             projectedGainForSpace max = new projectedGainForSpace(50000, null);
 			chosenSpaceAndGain = getAlphaBetaBestSpace(currentBoard, turns, min, max, this.name);
-			//TODO: IMPLEMENT A GETALPHABETABESTSPACE(CURRENTBOARD,TURNS);
 		}
 		else if("miniMax".equals(strategy)){
 			chosenSpaceAndGain = getMiniMaxBestSpace(currentBoard, turns);
 		}
 		else{
-			//TODO: Human player, get input.
 			chosenSpaceAndGain = getMiniMaxBestSpace(currentBoard, turns);
 		}
 		int row = chosenSpaceAndGain.nextSpace.row;

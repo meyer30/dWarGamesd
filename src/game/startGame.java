@@ -49,12 +49,11 @@ public class startGame {
 	public static void printStats(board completedBoard, player blueP, player greenP){
 		completedBoard.printBoard();
 		completedBoard.printScores();
-		
 		int totalMoves = 25;	//There is only 25 spaces.
-		completedBoard.printBoard();
-		completedBoard.printScores();
+		
 		long avgMoveTime = completedBoard.totalGameTime / (long) totalMoves;
 		int avgNodesExam = (greenP.totalNodesExamined + blueP.totalNodesExamined)/totalMoves;
+		System.out.println("");
 		System.out.println("Total game time was " + completedBoard.totalGameTime + " milliseconds.");
 		System.out.println("Average time per move was " + avgMoveTime + " milliseconds.");
 		System.out.println("Total nodes examined for blue player is " + blueP.totalNodesExamined + ".");
