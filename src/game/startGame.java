@@ -13,9 +13,9 @@ public class startGame {
 		Scanner in = new Scanner(System.in);
 		
 //		TODO: Ask what playerone/blueplayer is
-		player bluePlayer = new player("miniMaxStategy", "bluePlayer");		
+		player bluePlayer = new player("miniMax", "bluePlayer");		
 //		TODO: Ask if what playertwo/greenplayer is
-		player greenPlayer = new player("miniMaxStategy", "greenPlayer");
+		player greenPlayer = new player("miniMax", "greenPlayer");
 		
 //		TODO: Ask what board to play
 		String boardName = null, boardInfo = null;
